@@ -109,13 +109,13 @@ runs:
           scheme=${{ inputs.scheme }}
         fi
         echo "SCHEME=$scheme" >> $GITHUB_ENV
-    - name: Import Certificates
-      uses: apple-actions/import-codesign-certs@v1
-      id: codesign
-      with:
-        p12-file-base64: ${{ inputs.distribution-certificate-p12 }}
-        p12-password: ${{ inputs.distribution-certificate-password }}
-        keychain: codesign
+# - name: Import Certificates
+#   uses: apple-actions/import-codesign-certs@v1
+#   id: codesign
+#   with:
+#     p12-file-base64: ${{ inputs.distribution-certificate-p12 }}
+#     p12-password: ${{ inputs.distribution-certificate-password }}
+#     keychain: codesign
 # - name: Install App Store Profile
 #   uses: akiojin/install-provisioning-profile-github-action@v1.0
 #   with:
@@ -167,10 +167,10 @@ runs:
         echo "[XCode-Deploy]: Uploading archive using altool..."
         xcrun altool --upload-app -f ${{ github.workspace }}/${{ env.PROJECT_NAME }}.ipa -t iOS \
         --apiIssuer ${{ inputs.auth-key-issuer-id }} --apiKey ${{ inputs.auth-key-id }}
-    - name: Cleanup 
-      if: always()
-      shell: bash
-      run: |
-        echo "[XCode-Deploy]: Removing Keychain and private_keys folder..."
-        security delete-keychain codesign.keychain
-        rm  -rf ${{ github.workspace }}/private_keys || true
+# - name: Cleanup 
+#   if: always()
+#   shell: bash
+#   run: |
+#     echo "[XCode-Deploy]: Removing Keychain and private_keys folder..."
+#     security delete-keychain codesign.keychain
+#     rm  -rf ${{ github.workspace }}/private_keys || true
