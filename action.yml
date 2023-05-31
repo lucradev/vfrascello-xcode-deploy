@@ -116,10 +116,10 @@ runs:
         p12-file-base64: ${{ inputs.distribution-certificate-p12 }}
         p12-password: ${{ inputs.distribution-certificate-password }}
         keychain: codesign
-    - name: Install App Store Profile
-      uses: akiojin/install-provisioning-profile-github-action@v1.0
-      with:
-        base64: ${{ inputs.app-store-provisioning-profile }}
+# - name: Install App Store Profile
+#   uses: akiojin/install-provisioning-profile-github-action@v1.0
+#   with:
+#     base64: ${{ inputs.app-store-provisioning-profile }}
     - name: Select Xcode
       uses: maxim-lobanov/setup-xcode@v1.4.1
       with:
