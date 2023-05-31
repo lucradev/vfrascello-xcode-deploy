@@ -138,6 +138,7 @@ runs:
         ${{ env.TYPE }}: ${{ env.FILE_TO_BUILD }}
         scheme: ${{ env.SCHEME }}
         sdk: iphoneos
+        allow-provisioning-updates: true
         build-settings: >
           -archivePath ${{ env.PROJECT_NAME }}.xcarchive
         derived-data-path: build/derivedData
@@ -167,6 +168,7 @@ runs:
         xcrun altool --upload-app -f ${{ github.workspace }}/${{ env.PROJECT_NAME }}.ipa -t iOS \
         --apiIssuer ${{ inputs.auth-key-issuer-id }} --apiKey ${{ inputs.auth-key-id }}
     - name: Cleanup 
+      if: always()
       shell: bash
       run: |
         echo "[XCode-Deploy]: Removing Keychain and private_keys folder..."
